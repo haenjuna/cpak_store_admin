@@ -1,28 +1,20 @@
 import {createBrowserRouter} from "react-router-dom";
 import {lazy, Suspense} from "react";
-import LoadingPage from "../pages/LoadingPage.tsx";
-import todoRouter from "./todoRouter.tsx";
-import productRouter from "./productRouter.tsx";
 import memberRouter from "./memberRouter.tsx";
+import adminProductRouter from "./adminProductRouter.tsx";
+import LoadingPage from "../pages/LoadingPage.tsx";
 
-
-const MainPage = lazy(() => import("../pages/MainPage"))
-const Contact = lazy(() => import("../pages/Contact"))
+const AdminMainPage = lazy(() => import("../pages/AdminMainPage.tsx"))
 
 export const Loading = <LoadingPage></LoadingPage>
 
-const mainRouter = createBrowserRouter([
+const adminRouter = createBrowserRouter([
     {
         path: "/",
-        element: <Suspense fallback={Loading}><MainPage/></Suspense> ,
+        element: <Suspense fallback={Loading}><AdminMainPage/></Suspense> ,
     },
-    {
-        path: "/contact",
-        element: <Suspense fallback={Loading}><Contact/></Suspense>
-    },
-    todoRouter,
-    memberRouter,
-    productRouter
+    adminProductRouter,
+    memberRouter
 ])
 
-export default mainRouter
+export default adminRouter
