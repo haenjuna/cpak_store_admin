@@ -2,6 +2,8 @@ import {getProductList} from "../../apis/ProductAPI.ts";
 import {useEffect, useState} from "react";
 import {IPageResponse, IProduct} from "../../types/product.ts";
 import {useNavigate} from "react-router";
+import PageComponent from "../common/PageComponent.tsx";
+import {useSearchParams} from "react-router-dom";
 
 const initialState: IPageResponse = {
     dtoList: [],
@@ -17,25 +19,33 @@ const initialState: IPageResponse = {
 
 function ProductListComponent() {
 
-    const [products, setProducts] = useState<IPageResponse>({...initialState})
+    const [pageResponse, setPageResponse] = useState<IPageResponse>(initialState)
+
+    const [query] = useSearchParams()
+
+    const page: number = Number(query.get("page")) || 1
+    const size: number = Number(query.get("size")) || 10
+
 
     useEffect(() => {
-        getProductList().then(data => {
-            setProducts(data)
+        getProductList(page,size).then(data => {
+            setPageResponse(data)
         })
-    }, []);
+    }, [page,size]);
+
 
     const navigate = useNavigate();
 
-    const ListLi = products.dtoList.map((product:IProduct)=>{
+    const ListLi = pageResponse.dtoList.map((product:IProduct)=>{
 
-        const {uploadFileNames, pno, pname, pdesc, price} = product
+        const {pno, pname, pdesc, price, uploadFileNames} = product
 
         const moveToRead = (pno: number | undefined) => {
             navigate({
                 pathname: `/product/read/:${pno}`,
             })
         }
+
 
         return (
 
@@ -121,6 +131,7 @@ function ProductListComponent() {
                             <tbody>{ListLi}</tbody>
                         </table>
                     </div>
+                    <PageComponent pageResponse={pageResponse}></PageComponent>
                 </div>
             </div>
         </div>
