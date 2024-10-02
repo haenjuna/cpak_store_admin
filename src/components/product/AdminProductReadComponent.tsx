@@ -10,12 +10,17 @@ function AdminProductReadComponent() {
 
     const [product, setProduct] = useState<IProduct>({...initProductState})
 
+
     useEffect(() => {
         const pnoNum = Number(pno)
 
-        getOne(pnoNum).then(result => {
-            setProduct(result)
-        })
+        if (pnoNum){
+            getOne(pnoNum).then((result:IProduct) => {
+                console.log(result)
+                setProduct(result)
+            })
+        }
+
     },[pno])
 
     console.log(product)

@@ -1,6 +1,6 @@
 import {initProductState, IProduct} from "../../types/product.ts";
 import {useRef, useState} from "react";
-import {postAdd} from "../../apis/ProductAPI.ts";
+import {postAdd} from "../../apis/productAPI.ts";
 
 
 
