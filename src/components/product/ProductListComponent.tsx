@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {IPageResponse, IProduct} from "../../types/product.ts";
 import PageComponent from "../common/PageComponent.tsx";
 import {useSearchParams} from "react-router-dom";
+import LoadingComponent from "../common/LoadingComponent.tsx";
 
 
 const initialState: IPageResponse = {
@@ -20,15 +21,20 @@ const initialState: IPageResponse = {
 function ProductListComponent() {
 
     const [pageResponse, setPageResponse] = useState<IPageResponse>(initialState)
-
+    const [loading, setLoading] = useState<boolean>(false)
     const [query] = useSearchParams()
 
     const page: number = Number(query.get("page")) || 1
     const size: number = Number(query.get("size")) || 10
 
     useEffect(() => {
+        setLoading(true)
         getProductList(page,size).then(data => {
             setPageResponse(data)
+
+            setTimeout(() => {
+                setLoading(false)
+            }, 600)
         })
     }, [page,size]);
 
@@ -80,6 +86,7 @@ function ProductListComponent() {
     return (
 
         <div className="container mx-auto px-4 sm:px-8">
+            {loading && <LoadingComponent></LoadingComponent>}
             <div className="py-8">
                 <h2 className="text-2xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
                     Admin Product List Page
