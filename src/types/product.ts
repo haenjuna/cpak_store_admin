@@ -9,3 +9,14 @@ export interface IProduct {
     files: FormData | null
     uploadFileNames: FormData | null
 }
+
+// 객체 초기화 ( IProduct )
+export const initProductState:IProduct = {
+    pno: 0,
+    pname: '',
+    pdesc: '',
+    price: '',
+    files: null,
+    delFlag: false,
+    uploadFileNames:null
+};

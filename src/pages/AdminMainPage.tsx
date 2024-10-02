@@ -4,9 +4,7 @@ import {Outlet} from "react-router";
 function AdminMainPage() {
     return (
         <BasicLayout>
-            <div>
-                <Outlet></Outlet>
-            </div>
+            <Outlet></Outlet>
         </BasicLayout>
     );
 }

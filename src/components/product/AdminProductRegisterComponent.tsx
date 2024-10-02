@@ -1,23 +1,14 @@
-import {IProduct} from "../../types/product.ts";
+import {initProductState, IProduct} from "../../types/product.ts";
 import {useRef, useState} from "react";
 import {postAdd} from "../../apis/productAPI.ts";
 
-// 객체 초기화 ( IProduct )
-const initState:IProduct = {
-    pno: 0,
-    pname: '',
-    pdesc: '',
-    price: '',
-    files: null,
-    delFlag: false,
-    uploadFileNames:null
-};
+
 
 
 function AdminProductRegisterComponent() {
 
     // 객체 상태변경 및 사용을 위한 State 처리
-    const [product, setProduct] = useState<IProduct>({...initState});
+    const [product, setProduct] = useState<IProduct>({...initProductState});
 
     // 파일등록처리 반응형 객체
     const filesRef = useRef<HTMLInputElement>(null);
