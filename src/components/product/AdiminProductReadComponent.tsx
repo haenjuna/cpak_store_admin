@@ -14,12 +14,16 @@ function AdiminProductReadComponent() {
         const pnoNum = Number(pno)
 
         getOne(pnoNum).then(result => {
-            console.log(result)
+            setProduct(result)
         })
     },[pno])
 
+    console.log(product)
+
     return (
-        <div></div>
+        <div>
+
+        </div>
     );
 }
 
