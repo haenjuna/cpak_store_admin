@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {initProductState, IProduct} from "../../types/product.ts";
-import {deleteOne, getOne, putOne} from "../../apis/productAPI.ts";
 import {useParams} from "react-router";
+import {deleteOne, getOne, putOne} from "../../apis/productAPI.ts";
 
 function AdminProductModifyComponent() {
 

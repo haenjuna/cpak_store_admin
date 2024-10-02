@@ -30,7 +30,7 @@ export interface IPageResponse{
     current: number
 }
 
-export const initPageResoponseState:IPageResponse = {
+export const initPageResponseState = {
     dtoList: [],
     prev: false,
     next: false,
@@ -38,6 +38,7 @@ export const initPageResoponseState:IPageResponse = {
     prevPage: 0,
     nextPage: 0,
     totalPage: 0,
-    current: 0,
+    current: 0
 }
+
 
