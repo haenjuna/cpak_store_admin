@@ -1,11 +1,11 @@
+import AdminProductListPage from "./pages/product/AdminProductListPage.tsx";
+
 function App() {
 
     return (
 
     <>
-        <h1 className="text-white text-center mb-5">
-            hello
-        </h1>
+        <AdminProductListPage/>
     </>
   )
 }
