@@ -33,7 +33,7 @@ function BasicLayout({children}: {children: React.ReactNode}) {
             {/* Desktop sidebar */}
             <aside className="z-20 hidden w-64 overflow-y-auto bg-gradient-to-b from-purple-700 to-purple-900 md:block flex-shrink-0">
                 <div className="py-4 text-white">
-                    <Link to="/" className="flex items-center justify-center mb-8 p-2">
+                    <Link to="/main" className="flex items-center justify-center mb-8 p-2">
                         <span className="text-2xl font-bold bg-white text-purple-700 px-4 py-2 rounded-lg shadow-lg">C-PAK</span>
                     </Link>
                     <ul className="mt-6 space-y-2">
@@ -65,7 +65,7 @@ function BasicLayout({children}: {children: React.ReactNode}) {
                         <li className="relative px-6 py-3">
                             <Link
                                 className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-200"
-                                to="/forms">
+                                to="/member">
                                 <IconForms/>
                                 <span className="ml-4">Member</span>
                             </Link>
@@ -81,7 +81,6 @@ function BasicLayout({children}: {children: React.ReactNode}) {
             )}
             <aside
                 className={`fixed inset-y-0 z-20 flex-shrink-0 w-64 mt-16 overflow-y-auto bg-white md:hidden ${isSideMenuOpen ? 'block' : 'hidden'}`}>
-                {/* Mobile sidebar content */}
             </aside>
 
             <div className="flex flex-col flex-1 w-full">
