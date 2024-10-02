@@ -6,6 +6,7 @@ export interface IProduct {
     pdesc: string
     price: string
     files: FormData | null
+    uploadFileNames: FormData | null
 }
 
 export interface IPageResponse{
