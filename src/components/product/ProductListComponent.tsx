@@ -1,4 +1,4 @@
-import {getProductList} from "../../apis/ProductAPI.ts";
+import {getProductList} from "../../apis/productAPI.ts";
 import {useEffect, useState} from "react";
 import {IPageResponse, IProduct} from "../../types/product.ts";
 import PageComponent from "../common/PageComponent.tsx";

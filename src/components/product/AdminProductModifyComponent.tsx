@@ -2,10 +2,8 @@ import React, {useEffect, useRef, useState} from 'react';
 import {initProductState, IProduct} from "../../types/product.ts";
 import {deleteOne, getOne, putOne} from "../../apis/productAPI.ts";
 import {useParams} from "react-router";
-import {Simulate} from "react-dom/test-utils";
-import reset = Simulate.reset;
 
-function AdminProductModifyComponent(props) {
+function AdminProductModifyComponent() {
 
     // 객체 상태변경 및 사용을 위한 State 처리
     const [product, setProduct] = useState<IProduct>({...initProductState});

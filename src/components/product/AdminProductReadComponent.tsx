@@ -1,14 +1,15 @@
 import {useParams} from "react-router";
 import {useEffect, useState} from "react";
-import {initProductState, IProduct} from "../../types/product.ts";
-import {getOne} from "../../apis/productAPI.ts";
+import {initPageResoponseState, IPageResponse} from "../../types/product.ts";
+import {getOne} from "../../apis/ProductAPI.ts";
+
 
 
 function AdminProductReadComponent() {
 
     const {pno} = useParams()
 
-    const [product, setProduct] = useState<IProduct>({...initProductState})
+    const [product, setProduct] = useState<IPageResponse>({...initPageResoponseState})
 
     useEffect(() => {
         const pnoNum = Number(pno)

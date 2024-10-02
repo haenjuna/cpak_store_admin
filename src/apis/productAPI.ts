@@ -20,7 +20,7 @@ export const getProductList = async( page?:number, size?:number): Promise<IPageR
 
 }
 
-export const getOne = async(pno:number) : Promise<IPageResponse> => {
+export const getOne = async(pno:number) : Promise<IProduct> => {
 
     const res = await axios.get(`${host}/${pno}`)
 
@@ -37,7 +37,7 @@ export const postAdd = async (formData: FormData): Promise<number> => {
 }
 
 
-export const putOne = async  (product: IProduct, pno: number): Promise<IProduct> => {
+export const putOne = async (product: FormData, pno: number): Promise<IProduct> => {
 
     const res = await axios.put(`${host}/${pno}`, product)
 
