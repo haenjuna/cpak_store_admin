@@ -32,7 +32,7 @@ function ProductListComponent() {
         setLoading(true)
         getProductList(page,size).then(data => {
             setPageResponse(data)
-
+            console.log(data)
             setTimeout(() => {
                 setLoading(false)
             }, 600)
@@ -40,10 +40,12 @@ function ProductListComponent() {
     }, [query, location.key]);
 
 
-
     const ListLi = pageResponse.dtoList.map((product:IProduct)=>{
 
-        const {pno, pname, pdesc, price, uploadFileNames} = product
+        const {pno, pname, pdesc, price, delFlag, uploadFileNames} = product
+
+        if(delFlag) return null
+
 
         return (
 
