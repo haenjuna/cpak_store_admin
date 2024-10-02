@@ -56,7 +56,7 @@ function BasicLayout({children}: {children: React.ReactNode}) {
                                         <Link className="w-full block" to="/register">Register</Link>
                                     </li>
                                     <li className="px-2 py-1 transition-colors duration-150 hover:bg-purple-600 hover:text-white rounded">
-                                        <Link className="w-full block" to="/list">List</Link>
+                                        <Link className="w-full block" to="/product/list">List</Link>
                                     </li>
                                 </ul>
                             )}
