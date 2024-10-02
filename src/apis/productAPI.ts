@@ -1,5 +1,4 @@
-import Axios from "axios";
-import {IPageResponse, IProduct} from "../types/prod햐uct.ts";
+import {IPageResponse, IProduct} from "../types/product.ts";
 import axios from "axios";
 const host:string ='http://118.38.219.107:8089/api/products';
 const header =
