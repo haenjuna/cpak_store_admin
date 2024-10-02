@@ -1,7 +1,9 @@
 
 function AdminProductRegisterPage() {
     return (
-        <></>
+        <>
+            <AdminProductRegisterComponent></AdminProductRegisterComponent>
+        </>
     );
 }
 
