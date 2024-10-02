@@ -2,7 +2,7 @@ import {getProductList} from "../../apis/productAPI.ts";
 import {useEffect, useState} from "react";
 import {IPageResponse, IProduct} from "../../types/product.ts";
 import PageComponent from "../common/PageComponent.tsx";
-import {useSearchParams} from "react-router-dom";
+import {useLocation, useSearchParams} from "react-router-dom";
 import LoadingComponent from "../common/LoadingComponent.tsx";
 
 
@@ -23,6 +23,7 @@ function ProductListComponent() {
     const [pageResponse, setPageResponse] = useState<IPageResponse>(initialState)
     const [loading, setLoading] = useState<boolean>(false)
     const [query] = useSearchParams()
+    const location = useLocation()
 
     const page: number = Number(query.get("page")) || 1
     const size: number = Number(query.get("size")) || 10
@@ -36,7 +37,7 @@ function ProductListComponent() {
                 setLoading(false)
             }, 600)
         })
-    }, [page,size]);
+    }, [query, location.key]);
 
 
 
