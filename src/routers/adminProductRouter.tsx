@@ -8,9 +8,11 @@ const AdminProductListPage = lazy(() => import("../pages/product/AdminProductLis
 const AdminProductModifyPage = lazy(() => import("../pages/product/AdminProductModifyPage.tsx"))
 const AdminProductReadPage = lazy(() => import("../pages/product/AdminProductReadPage.tsx"))
 const AdminProductRegisterPage = lazy(() => import("../pages/product/AdminProductRegisterPage"))
+const ProductIndex = lazy(() => import("../pages/product/AdminProductIndex.tsx"))
 
 const adminProductRouter = {
     path: '/product',
+    element: <Suspense fallback={Loading}><ProductIndex/></Suspense>,
     children: [
         {
             path: "",
@@ -25,7 +27,7 @@ const adminProductRouter = {
             element: <Suspense fallback={Loading}><AdminProductRegisterPage/></Suspense>,
         },
         {
-            path: "read/:pno",
+            path: "read",
             element: <Suspense fallback={Loading}><AdminProductReadPage/></Suspense>
         },
         {
