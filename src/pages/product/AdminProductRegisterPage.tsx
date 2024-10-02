@@ -1,3 +1,4 @@
+import AdminProductRegisterComponent from "../../components/product/AdminProductRegisterComponent.tsx";
 
 function AdminProductRegisterPage() {
     return (
