@@ -1,6 +1,6 @@
-import Axios from "axios";
-import {IPageResponse, IProduct} from "../types/product.ts";
 import axios from "axios";
+import {IPageResponse, IProduct} from "../types/product.ts";
+
 
 const host:string ='http://118.38.219.107:8089/api/products';
 
@@ -14,7 +14,7 @@ export const getProductList = async( page?:number, size?:number): Promise<IPageR
     const pageValue:number = page || 1
     const sizeValue:number = size || 10
 
-    const res = await Axios.get(`${host}/list?page=${pageValue}&size=${sizeValue}`);
+    const res = await axios.get(`${host}/list?page=${pageValue}&size=${sizeValue}`);
 
     return res.data;
 
