@@ -8,7 +8,9 @@ const initState:IProduct = {
     pname: '',
     pdesc: '',
     price: '',
-    files: null
+    files: null,
+    delFlag: false,
+    uploadFileNames:null
 };
 
 
@@ -56,6 +58,7 @@ function AdminProductRegisterComponent() {
 
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+            <img src={`http:localhost:8089/api/products/view/s_${filesRef}`} alt=""/>
             <div className="w-full max-w-xs">
                 <label htmlFor="ProductName" className="block text-sm font-medium text-gray-700">
                     Product Name

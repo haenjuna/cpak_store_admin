@@ -1,11 +1,11 @@
 import BasicLayout from "../layouts/MainLayouut.tsx";
-import AdminProductListPage from "./product/AdminProductListPage.tsx";
+import {Outlet} from "react-router";
 
 function AdminMainPage() {
     return (
         <BasicLayout>
             <div>
-                <AdminProductListPage></AdminProductListPage>
+                <Outlet></Outlet>
             </div>
         </BasicLayout>
     );

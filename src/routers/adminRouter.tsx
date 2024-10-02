@@ -1,7 +1,8 @@
-import {createBrowserRouter} from "react-router-dom";
+
 import {lazy, Suspense} from "react";
 
 import LoadingPage from "../pages/LoadingPage.tsx";
+import {createBrowserRouter} from "react-router-dom";
 
 const AdminMainPage = lazy(() => import("../pages/AdminMainPage.tsx"))
 

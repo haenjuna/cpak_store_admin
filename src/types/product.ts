@@ -5,5 +5,7 @@ export interface IProduct {
     pname: string
     pdesc: string
     price: string
+    delFlag: boolean
     files: FormData | null
+    uploadFileNames: FormData | null
 }
