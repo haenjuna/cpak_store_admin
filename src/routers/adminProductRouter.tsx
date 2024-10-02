@@ -27,7 +27,7 @@ const adminProductRouter = {
             element: <Suspense fallback={Loading}><AdminProductRegisterPage/></Suspense>,
         },
         {
-            path: "read/:pno",
+            path: "read",
             element: <Suspense fallback={Loading}><AdminProductReadPage/></Suspense>
         },
         {
