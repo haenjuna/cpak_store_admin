@@ -1,11 +1,11 @@
-// import './App.css'
-import AdminProductRegisterComponent from "./components/product/AdminProductRegisterComponent.tsx";
+import './App.css'
+
 
 function App() {
 
     return (
     <>
-        <AdminProductRegisterComponent></AdminProductRegisterComponent>
+
     </>
   )
 }
