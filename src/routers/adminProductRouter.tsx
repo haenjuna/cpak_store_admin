@@ -11,15 +11,14 @@ const AdminProductRegisterPage = lazy(() => import("../pages/product/AdminProduc
 
 const adminProductRouter = {
     path: '/product',
-    element: <Suspense fallback={Loading}><ProductIndex/></Suspense>,
     children: [
-        {
-            path: "list",
-            element: <Suspense fallback={Loading}><AdminProductListPage/></Suspense>,
-        },
         {
             path: "",
             element: <Navigate to='list' replace={true}></Navigate>
+        },
+        {
+            path: "list",
+            element: <Suspense fallback={Loading}><AdminProductListPage/></Suspense>,
         },
         {
             path: "register",

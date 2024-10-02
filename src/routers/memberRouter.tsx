@@ -8,15 +8,14 @@ const AdminMemberListPage = lazy(() => import("../pages/member/AdminMemberListPa
 
 const memberRouter = {
     path: '/member',
-    element: <Suspense fallback={Loading}><MemberIndex/></Suspense>,
     children: [
-        {
-            path: "list",
-            element: <Suspense fallback={Loading}><AdminMemberListPage/></Suspense>,
-        },
         {
             path: "",
             element: <Navigate to='list' replace={true}></Navigate>
+        },
+        {
+            path: "list",
+            element: <Suspense fallback={Loading}><AdminMemberListPage/></Suspense>,
         },
         ]
 }
