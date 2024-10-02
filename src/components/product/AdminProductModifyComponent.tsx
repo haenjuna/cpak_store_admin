@@ -1,7 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {initProductState, IProduct} from "../../types/product.ts";
-import {getOne, putOne} from "../../apis/productAPI.ts";
+import {deleteOne, getOne, putOne} from "../../apis/productAPI.ts";
 import {useParams} from "react-router";
+import {Simulate} from "react-dom/test-utils";
+import reset = Simulate.reset;
 
 function AdminProductModifyComponent(props) {
 
@@ -9,12 +11,12 @@ function AdminProductModifyComponent(props) {
     const [product, setProduct] = useState<IProduct>({...initProductState});
 
     const {pno} = useParams()
+    const pnoNum = Number(pno)
 
     // 파일등록처리 반응형 객체
     const filesRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        const pnoNum = Number(pno)
 
         getOne(pnoNum).then(result => {
             setProduct(result)
@@ -32,8 +34,8 @@ function AdminProductModifyComponent(props) {
         }));
     };
 
-    // 등록버튼 클릭 함수
-    const handleSubmit = () => {
+    // 수정버튼 클릭 함수
+    const handleModifyClick = () => {
         const files = filesRef?.current?.files;
         const formData:FormData = new FormData();
 
@@ -47,11 +49,20 @@ function AdminProductModifyComponent(props) {
         formData.append('pdesc',product.pdesc)
         formData.append('price',product.price)
 
-        putOne(formData).then(data => {
+        console.log(formData)
+        putOne(formData, pnoNum).then(data => {
             console.log(data)
             if (filesRef?.current?.files){
                 filesRef.current.value = ''
             }
+        })
+    }
+
+    // 삭제 버튼 클릭 함수
+    const handleDeleteClick = () => {
+
+        deleteOne(pnoNum).then( () => {
+            console.log('delete complete')
         })
     }
 
@@ -107,14 +118,19 @@ function AdminProductModifyComponent(props) {
                     </label>
                     <input type="file"
                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                           value={product.uploadFileNames}
                            ref={filesRef} name='files' multiple={true}/>
                 </div>
                 <button
                     className="mt-4 w-1/2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-500 focus:outline-none"
-                    onClick={handleSubmit}
-                >ADD
+                    onClick={handleModifyClick}
+                >Modify
                 </button>
+                <button
+                    className="mt-4 w-1/2 bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-500 focus:outline-none"
+                    onClick={handleDeleteClick}
+                >Delete
+                </button>
+
             </div>
         </div>
     );

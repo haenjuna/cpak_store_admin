@@ -25,9 +25,16 @@ export const getOne = async  (pno: number): Promise<IProduct> => {
     return res.data
 }
 
-export const putOne = async  (product: IProduct): Promise<IProduct> => {
+export const putOne = async  (product: IProduct, pno: number): Promise<IProduct> => {
 
-    const res = await axios.put(`${host}/${product.pno}`, product)
+    const res = await axios.put(`${host}/${pno}`, product)
+
+    return res.data
+}
+
+export const deleteOne = async  (pno: number): Promise<IProduct> => {
+
+    const res = await axios.delete(`${host}/${pno}`)
 
     return res.data
 }
