@@ -1,4 +1,4 @@
-import {createBrowserRouter} from "react-router-dom";
+import {createBrowserRouter, Navigate} from "react-router-dom";
 import {lazy, Suspense} from "react";
 
 import LoadingPage from "../pages/LoadingPage.tsx";
@@ -9,7 +9,15 @@ export const Loading = <LoadingPage></LoadingPage>
 
 const adminRouter = createBrowserRouter([
     {
-        path: "/",
+        path: "",
+        element: <Navigate to='login' replace={true}></Navigate>
+    },
+    {
+        path: "/main",
+        element: <Suspense fallback={Loading}><AdminMainPage/></Suspense> ,
+    },
+    {
+        path: "/login",
         element: <Suspense fallback={Loading}><AdminMainPage/></Suspense> ,
     },
     // adminProductRouter,
