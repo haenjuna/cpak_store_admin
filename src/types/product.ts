@@ -30,3 +30,15 @@ export interface IPageResponse{
     current: number
 }
 
+export const initPageResponseState = {
+    dtoList: [],
+    prev: false,
+    next: false,
+    totalCount: 0,
+    prevPage: 0,
+    nextPage: 0,
+    totalPage: 0,
+    current: 0
+}
+
+
