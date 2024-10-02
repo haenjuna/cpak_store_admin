@@ -6,6 +6,7 @@ import memberRouter from "./memberRouter.tsx";
 import adminProductRouter from "./adminProductRouter.tsx";
 
 const AdminMainPage = lazy(() => import("../pages/AdminMainPage.tsx"))
+const AdminLoginPage = lazy(() => import("../pages/AdminLoginPage.tsx"))
 
 export const Loading = <LoadingPage></LoadingPage>
 
@@ -20,7 +21,7 @@ const adminRouter = createBrowserRouter([
     },
     {
         path: "/login",
-        element: <Suspense fallback={Loading}><AdminMainPage/></Suspense> ,
+        element: <Suspense fallback={Loading}><AdminLoginPage/></Suspense> ,
     },
     adminProductRouter,
     memberRouter
