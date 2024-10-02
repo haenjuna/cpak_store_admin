@@ -4,7 +4,7 @@ import {initProductState, IProduct} from "../../types/product.ts";
 import {getOne} from "../../apis/productAPI.ts";
 
 
-function AdiminProductReadComponent() {
+function AdminProductReadComponent() {
 
     const {pno} = useParams()
 
@@ -27,4 +27,4 @@ function AdiminProductReadComponent() {
     );
 }
 
-export default AdiminProductReadComponent;
+export default AdminProductReadComponent;

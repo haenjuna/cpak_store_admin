@@ -1,7 +1,11 @@
+import AdminProductRegisterComponent from "../../components/product/AdminProductRegisterComponent.tsx";
 
 function AdminProductRegisterPage() {
     return (
-        <div>Admin Product Register Page</div>
+        <>
+            <div>Admin Product Register Page</div>
+            <AdminProductRegisterComponent></AdminProductRegisterComponent>
+        </>
     );
 }
 

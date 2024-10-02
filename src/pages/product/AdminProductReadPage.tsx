@@ -1,10 +1,10 @@
-import AdiminProductReadComponent from "../../components/product/AdiminProductReadComponent.tsx";
+import AdminProductReadComponent from "../../components/product/AdminProductReadComponent.tsx";
 
 function AdminProductReadPage() {
     return (
         <>
             <div>Admin Product Read Page</div>
-            <AdiminProductReadComponent></AdiminProductReadComponent>
+            <AdminProductReadComponent></AdminProductReadComponent>
         </>
     );
 }

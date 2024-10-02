@@ -24,3 +24,10 @@ export const getOne = async  (pno: number): Promise<IProduct> => {
 
     return res.data
 }
+
+export const putOne = async  (product: IProduct): Promise<IProduct> => {
+
+    const res = await axios.put(`${host}/${product.pno}`, product)
+
+    return res.data
+}
