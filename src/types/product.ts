@@ -1,5 +1,3 @@
-
-
 export interface IProduct {
     pno?: number
     pname: string
@@ -20,3 +18,15 @@ export const initProductState:IProduct = {
     delFlag: false,
     uploadFileNames:null
 };
+
+export interface IPageResponse{
+    dtoList: IProduct[],
+    prev: boolean,
+    next: boolean,
+    totalCount: number,
+    prevPage: number,
+    nextPage: number
+    totalPage: number
+    current: number
+}
+
