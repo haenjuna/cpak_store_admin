@@ -2,8 +2,8 @@ import {createBrowserRouter, Navigate} from "react-router-dom";
 import {lazy, Suspense} from "react";
 
 import LoadingPage from "../pages/LoadingPage.tsx";
-import memberRouter from "./memberRouter.tsx";
 import adminProductRouter from "./adminProductRouter.tsx";
+import memberRouter from "./memberRouter.tsx";
 
 const AdminMainPage = lazy(() => import("../pages/AdminMainPage.tsx"))
 const AdminLoginPage = lazy(() => import("../pages/AdminLoginPage.tsx"))
