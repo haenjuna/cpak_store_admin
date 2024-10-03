@@ -53,7 +53,7 @@ function BasicLayout({children}: {children: React.ReactNode}) {
                             {isProductDropdownOpen && (
                                 <ul className="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium rounded-md bg-purple-800 bg-opacity-50">
                                     <li className="px-2 py-1 transition-colors duration-150 hover:bg-purple-600 hover:text-white rounded">
-                                        <Link className="w-full block" to="/register">Register</Link>
+                                        <Link className="w-full block" to="/product/register">Register</Link>
                                     </li>
                                     <li className="px-2 py-1 transition-colors duration-150 hover:bg-purple-600 hover:text-white rounded">
                                         <Link className="w-full block" to="/product/list">List</Link>
