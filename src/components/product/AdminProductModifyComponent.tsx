@@ -3,12 +3,13 @@ import {initProductState, IProduct} from "../../types/product.ts";
 import {deleteOne, getOne, putOne} from "../../apis/productAPI.ts";
 import {useParams} from "react-router";
 import LoadingComponent from "../common/LoadingComponent.tsx";
+import useCustomML from "../../hooks/useCustomML.ts";
 
 function AdminProductModifyComponent() {
 
     // 객체 상태변경 및 사용을 위한 State 처리
     const [product, setProduct] = useState<IProduct>({...initProductState});
-    const [loading, setLoading] = useState<boolean>(false)
+    const {loading, setLoading}= useCustomML()
     const {pno} = useParams()
     const pnoNum = Number(pno)
 

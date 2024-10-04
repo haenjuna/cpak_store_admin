@@ -65,7 +65,7 @@ function ProductListComponent() {
                 </td>
             </tr>
 
-    )
+        )
     })
 
 
@@ -110,8 +110,8 @@ function ProductListComponent() {
                 {modal.isModal && <AdminProductModalComponent></AdminProductModalComponent>}
             </div>
         </div>
-)
-    ;
+    )
+        ;
 }
 
 export default ProductListComponent;
