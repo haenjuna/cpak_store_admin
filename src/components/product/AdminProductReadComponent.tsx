@@ -15,7 +15,6 @@ function AdminProductReadComponent() {
 
         if (pnoNum){
             getOne(pnoNum).then((result:IProduct) => {
-                console.log(result)
                 setProduct(result)
             })
         }

@@ -22,18 +22,23 @@ const initialState: IPageResponse = {
 function ProductListComponent() {
 
     const [pageResponse, setPageResponse] = useState<IPageResponse>(initialState)
-
+    const [loading, setLoading] = useState<boolean>(false)
     const [query] = useSearchParams()
+    const location = useLocation()
 
     const page: number = Number(query.get("page")) || 1
     const size: number = Number(query.get("size")) || 10
 
     useEffect(() => {
+        setLoading(true)
         getProductList(page,size).then(data => {
             setPageResponse(data)
+            console.log(data)
+            setTimeout(() => {
+                setLoading(false)
+            }, 600)
         })
-    }, [page,size]);
-
+    }, [query, location.key]);
 
     const [modal, setModal] = useRecoilState(modalState)
 
@@ -47,7 +52,10 @@ function ProductListComponent() {
 
     const ListLi = pageResponse.dtoList.map((product:IProduct)=>{
 
-        const {pno, pname, pdesc, price, uploadFileNames} = product
+        const {pno, pname, pdesc, price, delFlag, uploadFileNames} = product
+
+        if(delFlag) return null
+
 
         return (
 
@@ -93,6 +101,7 @@ function ProductListComponent() {
     return (
 
         <div className="container mx-auto px-4 sm:px-8">
+            {loading && <LoadingComponent></LoadingComponent>}
             <div className="py-8">
                 <h2 className="text-2xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
                     Admin Product List Page

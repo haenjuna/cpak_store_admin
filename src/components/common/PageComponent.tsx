@@ -27,7 +27,7 @@ function PageComponent({pageResponse}: Props): ReactElement {
 
     const pageNums:number[] = makeArr(startPage, endPage)
 
-    const [query, setQuery] = useSearchParams()
+    const [query,setQuery] = useSearchParams()
 
     const changePage = (pageNum: number) => {
 
