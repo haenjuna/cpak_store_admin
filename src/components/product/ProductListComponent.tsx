@@ -1,26 +1,18 @@
 import {getProductList} from "../../apis/productAPI.ts";
 import {useEffect, useState} from "react";
-import {IPageResponse, IProduct} from "../../types/product.ts";
+import {initPageResponseState, IPageResponse, IProduct} from "../../types/product.ts";
 import PageComponent from "../common/PageComponent.tsx";
 import {useLocation, useSearchParams} from "react-router-dom";
 import {useRecoilState} from "recoil";
 import modalState from "../../atoms/modalState.ts";
+import AdminProductModalComponent from "./AdminProductModalComponent.tsx";
+import LoadingComponent from "../common/LoadingComponent.tsx";
 
-const initialState: IPageResponse = {
-    dtoList: [],
-    prev: false,
-    next: false,
-    totalCount: 10,
-    prevPage: 0,
-    nextPage: 0,
-    totalPage: 10,
-    current: 0
-}
 
 
 function ProductListComponent() {
 
-    const [pageResponse, setPageResponse] = useState<IPageResponse>(initialState)
+    const [pageResponse, setPageResponse] = useState<IPageResponse>({...initPageResponseState})
     const [loading, setLoading] = useState<boolean>(false)
     const [query] = useSearchParams()
     const location = useLocation()
@@ -32,10 +24,7 @@ function ProductListComponent() {
         setLoading(true)
         getProductList(page,size).then(data => {
             setPageResponse(data)
-            console.log(data)
-            setTimeout(() => {
-                setLoading(false)
-            }, 600)
+            setLoading(false)
         })
     }, [query, location.key]);
 
@@ -44,6 +33,7 @@ function ProductListComponent() {
     const openModal = (pno: number) => {
         setModal({
             isModal: true,
+            isModify: false,
             pno
         });
     };
@@ -83,7 +73,9 @@ function ProductListComponent() {
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm dark:bg-gray-800 dark:border-gray-700">
                     <div className="flex items-center space-x-4">
-                        <button className="text-purple-600 hover:text-purple-900 dark:text-purple-400 dark:hover:text-purple-300 border-purple-50">
+                        <button
+                            onClick={() => openModal(Number(pno))}
+                            className="text-purple-600 hover:text-purple-900 dark:text-purple-400 dark:hover:text-purple-300 border-purple-50">
                             조회
                         </button>
 
@@ -91,13 +83,14 @@ function ProductListComponent() {
                 </td>
             </tr>
 
-    )
+        )
     })
 
 
     return (
 
         <div className="container mx-auto px-4 sm:px-8">
+            {loading && <LoadingComponent></LoadingComponent>}
             <div className="py-8">
                 <h2 className="text-2xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
                     Admin Product List Page
@@ -131,10 +124,12 @@ function ProductListComponent() {
                     </div>
                     <PageComponent pageResponse={pageResponse}></PageComponent>
                 </div>
+
+                {modal.isModal && <AdminProductModalComponent></AdminProductModalComponent>}
             </div>
         </div>
-)
-    ;
+    )
+        ;
 }
 
 export default ProductListComponent;
