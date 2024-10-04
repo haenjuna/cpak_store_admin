@@ -1,27 +1,17 @@
 import {getProductList} from "../../apis/productAPI.ts";
 import {useEffect, useState} from "react";
-import {IPageResponse, IProduct} from "../../types/product.ts";
+import {initPageResponseState, IPageResponse, IProduct} from "../../types/product.ts";
 import PageComponent from "../common/PageComponent.tsx";
-import {useSearchParams} from "react-router-dom";
+import {useLocation, useSearchParams} from "react-router-dom";
 import {useRecoilState} from "recoil";
 import modalState from "../../atoms/modalState.ts";
 import AdminProductModalComponent from "./AdminProductModalComponent.tsx";
-
-const initialState: IPageResponse = {
-    dtoList: [],
-    prev: false,
-    next: false,
-    totalCount: 10,
-    prevPage: 0,
-    nextPage: 0,
-    totalPage: 10,
-    current: 0
-}
+import LoadingComponent from "../common/LoadingComponent.tsx";
 
 
 function ProductListComponent() {
 
-    const [pageResponse, setPageResponse] = useState<IPageResponse>(initialState)
+    const [pageResponse, setPageResponse] = useState<IPageResponse>({...initPageResponseState})
     const [loading, setLoading] = useState<boolean>(false)
     const [query] = useSearchParams()
     const location = useLocation()
