@@ -35,7 +35,7 @@ function AdminProductModalComponent() {
                 <div className="flex justify-between items-center p-6 border-b">
                     <h2 className="text-xl font-semibold text-gray-900">제품 상세 정보</h2>
                     <button
-                        onClick={closeModal}  // 모달 닫기 버튼
+                        onClick={closeModal}
                         className="text-gray-400 hover:text-gray-500 text-2xl font-bold"
                         aria-label="닫기"
                     >
@@ -45,7 +45,7 @@ function AdminProductModalComponent() {
                 <div className="p-6">
                     <div className="mb-4">
                         <img
-                            src={`http://localhost:8089/api/products/view/${product.uploadFileNames}`}
+                            src={`http://118.38.219.107:8089/api/products/view/${product.uploadFileNames}`}
                             className="w-full h-48 object-cover rounded"
                             alt={product.pname}
                         />

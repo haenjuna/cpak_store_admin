@@ -58,7 +58,7 @@ function ProductListComponent() {
                         <div className="flex-shrink-0 w-10 h-10">
                             <img
                                 className="w-full h-full rounded-full"
-                                src={`http://localhost:8089/api/products/view/s_${uploadFileNames}`}/>
+                                src={`http://118.38.219.107:8089/api/products/view/s_${uploadFileNames}`}/>
                         </div>
                     </div>
                 </td>
