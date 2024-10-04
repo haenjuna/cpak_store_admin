@@ -1,13 +1,14 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {initProductState, IProduct} from "../../types/product.ts";
-import {useParams} from "react-router";
 import {deleteOne, getOne, putOne} from "../../apis/productAPI.ts";
+import {useParams} from "react-router";
+import LoadingComponent from "../common/LoadingComponent.tsx";
 
 function AdminProductModifyComponent() {
 
     // 객체 상태변경 및 사용을 위한 State 처리
     const [product, setProduct] = useState<IProduct>({...initProductState});
-
+    const [loading, setLoading] = useState<boolean>(false)
     const {pno} = useParams()
     const pnoNum = Number(pno)
 
@@ -15,9 +16,13 @@ function AdminProductModifyComponent() {
     const filesRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-
+        setLoading(true)
         getOne(pnoNum).then(result => {
             setProduct(result)
+
+            setTimeout(() => {
+                setLoading(false)
+            }, 600)
         })
     },[pno])
 
@@ -66,6 +71,7 @@ function AdminProductModifyComponent() {
 
     return (
         <div>
+            {loading && <LoadingComponent></LoadingComponent>}
             <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
                 <img src={`http:localhost:8089/api/products/view/s_${filesRef}`} alt=""/>
                 <div className="w-full max-w-xs">
