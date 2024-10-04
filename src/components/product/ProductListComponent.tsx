@@ -7,6 +7,8 @@ import {useRecoilState} from "recoil";
 import modalState from "../../atoms/modalState.ts";
 import AdminProductModalComponent from "./AdminProductModalComponent.tsx";
 import LoadingComponent from "../common/LoadingComponent.tsx";
+import LoadingComponent from "../common/LoadingComponent.tsx";
+
 
 
 function ProductListComponent() {
@@ -23,10 +25,7 @@ function ProductListComponent() {
         setLoading(true)
         getProductList(page,size).then(data => {
             setPageResponse(data)
-            console.log(data)
-            setTimeout(() => {
-                setLoading(false)
-            }, 600)
+            setLoading(false)
         })
     }, [query, location.key]);
 
@@ -35,6 +34,7 @@ function ProductListComponent() {
     const openModal = (pno: number) => {
         setModal({
             isModal: true,
+            isModify: false,
             pno
         });
     };
@@ -84,7 +84,7 @@ function ProductListComponent() {
                 </td>
             </tr>
 
-    )
+        )
     })
 
 
@@ -129,8 +129,8 @@ function ProductListComponent() {
                 {modal.isModal && <AdminProductModalComponent></AdminProductModalComponent>}
             </div>
         </div>
-)
-    ;
+    )
+        ;
 }
 
 export default ProductListComponent;
