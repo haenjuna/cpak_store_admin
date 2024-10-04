@@ -2,10 +2,11 @@ import {getProductList} from "../../apis/productAPI.ts";
 import {useEffect, useState} from "react";
 import {IPageResponse, IProduct} from "../../types/product.ts";
 import PageComponent from "../common/PageComponent.tsx";
-import {useSearchParams} from "react-router-dom";
+import {useLocation, useSearchParams} from "react-router-dom";
 import {useRecoilState} from "recoil";
 import modalState from "../../atoms/modalState.ts";
 import AdminProductModalComponent from "./AdminProductModalComponent.tsx";
+import LoadingComponent from "../common/LoadingComponent.tsx";
 
 const initialState: IPageResponse = {
     dtoList: [],
