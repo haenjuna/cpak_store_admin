@@ -2,6 +2,7 @@ import {atom} from "recoil";
 
 const initialState = {
     isModal: false,
+    isModify: false,
     pno : 0
 }
 

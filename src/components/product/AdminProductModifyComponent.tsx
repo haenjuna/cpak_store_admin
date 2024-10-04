@@ -1,29 +1,25 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {initProductState, IProduct} from "../../types/product.ts";
 import {deleteOne, getOne, putOne} from "../../apis/productAPI.ts";
-import {useParams} from "react-router";
 import LoadingComponent from "../common/LoadingComponent.tsx";
-import useCustomML from "../../hooks/useCustomML.ts";
+import {useRecoilValue} from "recoil";
+import modalState from "../../atoms/modalState.ts";
 
 function AdminProductModifyComponent() {
 
     // 객체 상태변경 및 사용을 위한 State 처리
     const [product, setProduct] = useState<IProduct>({...initProductState});
-    const {loading, setLoading}= useCustomML()
-    const {pno} = useParams()
-    const pnoNum = Number(pno)
+    const [loading, setLoading] = useState<boolean>(false)
+    const { pno } = useRecoilValue(modalState)
 
     // 파일등록처리 반응형 객체
     const filesRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         setLoading(true)
-        getOne(pnoNum).then(result => {
+        getOne(pno).then(result => {
             setProduct(result)
-
-            setTimeout(() => {
-                setLoading(false)
-            }, 600)
+            setLoading(false)
         })
     },[pno])
 
@@ -54,7 +50,7 @@ function AdminProductModifyComponent() {
         formData.append('price',product.price)
 
         console.log(formData)
-        putOne(formData, pnoNum).then(data => {
+        putOne(formData, pno).then(data => {
             console.log(data)
             if (filesRef?.current?.files){
                 filesRef.current.value = ''
@@ -65,7 +61,7 @@ function AdminProductModifyComponent() {
     // 삭제 버튼 클릭 함수
     const handleDeleteClick = () => {
 
-        deleteOne(pnoNum).then( () => {
+        deleteOne(pno).then( () => {
             console.log('delete complete')
         })
     }

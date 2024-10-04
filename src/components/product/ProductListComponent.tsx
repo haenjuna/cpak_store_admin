@@ -1,25 +1,43 @@
-import {IProduct} from "../../types/product.ts";
+import {getProductList} from "../../apis/productAPI.ts";
+import {useEffect, useState} from "react";
+import {initPageResponseState, IPageResponse, IProduct} from "../../types/product.ts";
 import PageComponent from "../common/PageComponent.tsx";
+import {useLocation, useSearchParams} from "react-router-dom";
 import {useRecoilState} from "recoil";
 import modalState from "../../atoms/modalState.ts";
 import AdminProductModalComponent from "./AdminProductModalComponent.tsx";
 import LoadingComponent from "../common/LoadingComponent.tsx";
-import useProductList from "../../hooks/useProductList.ts";
 
 
 
 function ProductListComponent() {
 
-    const {loading, pageResponse} = useProductList()
+    const [pageResponse, setPageResponse] = useState<IPageResponse>({...initPageResponseState})
+    const [loading, setLoading] = useState<boolean>(false)
+    const [query] = useSearchParams()
+    const location = useLocation()
+
+    const page: number = Number(query.get("page")) || 1
+    const size: number = Number(query.get("size")) || 10
+
+    useEffect(() => {
+        setLoading(true)
+        getProductList(page,size).then(data => {
+            setPageResponse(data)
+            setLoading(false)
+        })
+    }, [query, location.key]);
 
     const [modal, setModal] = useRecoilState(modalState)
 
     const openModal = (pno: number) => {
         setModal({
             isModal: true,
+            isModify: false,
             pno
         });
     };
+
 
     const ListLi = pageResponse.dtoList.map((product:IProduct)=>{
 
@@ -65,7 +83,7 @@ function ProductListComponent() {
                 </td>
             </tr>
 
-    )
+        )
     })
 
 
@@ -110,8 +128,8 @@ function ProductListComponent() {
                 {modal.isModal && <AdminProductModalComponent></AdminProductModalComponent>}
             </div>
         </div>
-)
-    ;
+    )
+        ;
 }
 
 export default ProductListComponent;
