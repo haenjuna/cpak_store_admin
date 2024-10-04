@@ -8,7 +8,7 @@ function AdminLoginPage() {
                 <div className="hidden lg:block lg:w-1/2 bg-purple-600 rounded-l-xl"></div>
 
                 <div className="w-full lg:w-1/2 p-16">
-                    <h1 className="text-4xl font-bold text-gray-800 mb-10">Login</h1>
+                    <h1 className="text-4xl font-bold text-gray-800 mb-10 text-center">Login</h1>
                     <form>
                         <div className="mb-8">
                             <label htmlFor="email" className="block text-lg font-medium text-gray-700 mb-3">

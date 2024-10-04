@@ -2,9 +2,10 @@ import {getProductList} from "../../apis/productAPI.ts";
 import {useEffect, useState} from "react";
 import {IPageResponse, IProduct} from "../../types/product.ts";
 import PageComponent from "../common/PageComponent.tsx";
-import {useLocation, useSearchParams} from "react-router-dom";
-import LoadingComponent from "../common/LoadingComponent.tsx";
-
+import {useSearchParams} from "react-router-dom";
+import {useRecoilState} from "recoil";
+import modalState from "../../atoms/modalState.ts";
+import AdminProductModalComponent from "./AdminProductModalComponent.tsx";
 
 const initialState: IPageResponse = {
     dtoList: [],
@@ -38,6 +39,15 @@ function ProductListComponent() {
             }, 600)
         })
     }, [query, location.key]);
+
+    const [modal, setModal] = useRecoilState(modalState)
+
+    const openModal = (pno: number) => {
+        setModal({
+            isModal: true,
+            pno
+        });
+    };
 
 
     const ListLi = pageResponse.dtoList.map((product:IProduct)=>{
@@ -74,7 +84,9 @@ function ProductListComponent() {
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm dark:bg-gray-800 dark:border-gray-700">
                     <div className="flex items-center space-x-4">
-                        <button className="text-purple-600 hover:text-purple-900 dark:text-purple-400 dark:hover:text-purple-300 border-purple-50">
+                        <button
+                            onClick={() => openModal(Number(pno))}
+                            className="text-purple-600 hover:text-purple-900 dark:text-purple-400 dark:hover:text-purple-300 border-purple-50">
                             조회
                         </button>
 
@@ -123,6 +135,8 @@ function ProductListComponent() {
                     </div>
                     <PageComponent pageResponse={pageResponse}></PageComponent>
                 </div>
+
+                {modal.isModal && <AdminProductModalComponent></AdminProductModalComponent>}
             </div>
         </div>
 )
