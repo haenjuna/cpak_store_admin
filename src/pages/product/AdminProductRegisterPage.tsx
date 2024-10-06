@@ -3,7 +3,6 @@ import AdminProductRegisterComponent from "../../components/product/AdminProduct
 function AdminProductRegisterPage() {
     return (
         <>
-            <div>Admin Product Register Page</div>
             <AdminProductRegisterComponent></AdminProductRegisterComponent>
         </>
     );

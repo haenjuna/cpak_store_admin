@@ -8,8 +8,6 @@ import modalState from "../../atoms/modalState.ts";
 import AdminProductModalComponent from "./AdminProductModalComponent.tsx";
 import LoadingComponent from "../common/LoadingComponent.tsx";
 
-
-
 function ProductListComponent() {
 
     const [pageResponse, setPageResponse] = useState<IPageResponse>({...initPageResponseState})
