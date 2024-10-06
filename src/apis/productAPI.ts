@@ -6,14 +6,8 @@ const header =
     {
         headers: {'content-type' : 'multipart/form-data'}
     }
-export const getProductList = async( page?:number, size?:number): Promise<IPageResponse> => {
-    const pageValue:number = page || 1
-    const sizeValue:number = size || 10
-    const res = await axios.get(`${host}/list?page=${pageValue}&size=${sizeValue}`);
-    return res.data;
-}
 
-export const searchProductList = async (page?: number, size?: number, pname?: string): Promise<IPageResponse> => {
+export const getProductList = async (page?: number, size?: number, pname?: string): Promise<IPageResponse> => {
     const pageValue: number = page || 1;
     const sizeValue: number = size || 10;
 
