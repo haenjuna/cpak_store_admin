@@ -12,6 +12,21 @@ export const getProductList = async( page?:number, size?:number): Promise<IPageR
     const res = await axios.get(`${host}/list?page=${pageValue}&size=${sizeValue}`);
     return res.data;
 }
+
+export const searchProductList = async (page?: number, size?: number, pname?: string): Promise<IPageResponse> => {
+    const pageValue: number = page || 1;
+    const sizeValue: number = size || 10;
+
+    let query = `${host}/list?page=${pageValue}&size=${sizeValue}`;
+
+    if (pname) {
+        query += `&pname=${encodeURIComponent(pname)}`; // pname 파라미터 추가
+    }
+
+    const res = await axios.get(query);
+    return res.data;
+};
+
 export const getOne = async(pno:number) : Promise<IProduct> => {
     const res = await axios.get(`${host}/${pno}`)
     return res.data;
