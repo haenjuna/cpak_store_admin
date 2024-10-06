@@ -7,14 +7,15 @@ function AdminProductModalComponent() {
 
     const { isModify }  = useRecoilValue(modalState)
 
+    console.log(isModify)
 
     return (
-        <>
+        <div>
             {isModify
                 ? <AdminProductModifyComponent/>
                 : <AdminProductReadPage/>
             }
-        </>
+        </div>
     );
 }
 
