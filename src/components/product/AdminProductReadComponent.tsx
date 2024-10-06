@@ -32,7 +32,7 @@ function AdminProductReadComponent() {
     };
     // 수정 전환
     const changeToModify = () => {
-        setModal({ isModal:true, isModify: true, pno: pno})
+        setModal({ isModal:true, isModify: true, pno})
     }
 
     return (

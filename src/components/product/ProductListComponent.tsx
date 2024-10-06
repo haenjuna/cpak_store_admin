@@ -7,9 +7,6 @@ import {useRecoilState} from "recoil";
 import modalState from "../../atoms/modalState.ts";
 import AdminProductModalComponent from "./AdminProductModalComponent.tsx";
 import LoadingComponent from "../common/LoadingComponent.tsx";
-import LoadingComponent from "../common/LoadingComponent.tsx";
-
-
 
 function ProductListComponent() {
 
