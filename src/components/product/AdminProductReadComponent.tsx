@@ -38,7 +38,7 @@ function AdminProductReadComponent() {
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
             <div className="bg-white rounded-lg shadow-xl w-full max-w-md">
-                <div className="flex justify-between items-center p-6 border-b">
+            <div className="flex justify-between items-center p-6 border-b">
                     <h2 className="text-xl font-semibold text-gray-900">제품 상세 정보</h2>
                     <button
                         onClick={closeModal}
@@ -49,12 +49,8 @@ function AdminProductReadComponent() {
                     </button>
                 </div>
                 <div className="p-6">
-                    <div className="mb-4">
-                        <img
-                            src={`http://118.38.219.107:8089/api/products/view/${product.uploadFileNames}`}
-                            className="w-full h-48 object-cover rounded"
-                            alt={product.pname}
-                        />
+                    <div>
+                        <img src={`http://118.38.219.107:8089/api/products/view/s_${product.uploadFileNames}`} alt=""/>
                     </div>
                     <div className="space-y-4">
                         <div className="flex gap-2">
