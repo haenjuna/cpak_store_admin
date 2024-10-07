@@ -25,8 +25,8 @@ function ProductListComponent() {
     useEffect(() => {
         setLoading(true);
         getProductList(page, size, searchCondition.type, searchCondition.keyword).then((data) => {
-            setPageResponse(data);
-            setLoading(false);
+            setPageResponse(data)
+            setLoading(false)
         });
     }, [query,searchCondition, location.key, page, size]);
 
@@ -96,10 +96,12 @@ function ProductListComponent() {
                     <div className="flex items-center space-x-4">
                         <button
                             onClick={() => openModal(Number(pno))}
-                            className="text-purple-600 hover:text-purple-900 dark:text-purple-400 dark:hover:text-purple-300 border-purple-50"
+                            className="relative inline-block px-3 py-1 font-semibold text-purple-900 leading-tight transition ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400"
                         >
-                            조회
+                            <span aria-hidden className="absolute inset-0 bg-purple-200 opacity-50 rounded-full"></span>
+                            <span className="relative">조회</span>
                         </button>
+
                     </div>
                 </td>
             </tr>
@@ -107,42 +109,42 @@ function ProductListComponent() {
     });
 
     return (
-        <div className="container mx-auto px-4 sm:px-8">
-            {loading && <LoadingComponent />}
+        <div className="container mx-auto px-5 sm:px-8">
+            {loading && <LoadingComponent/>}
             <div className="py-8">
-                <h2 className="text-2xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-                    Admin Product List Page
-                </h2>
 
                 {/* 검색 입력과 버튼 */}
-                <div className="mb-4 flex space-x-4">
+                <div className="mb-4 flex items-center space-x-4 p-4 bg-white shadow rounded-lg dark:bg-gray-800">
                     <select
                         name="type"
                         value={searchCondition.type}
                         onChange={handleSearchInputType}
-                        className="border rounded px-4 py-2"
+                        className="border border-gray-300 rounded-md mr-2 px-4 py-2 text-sm text-gray-700 bg-gray-50 transition ease-in-out duration-200 hover:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-400 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300"
                     >
                         <option value="pname">상품명</option>
                         <option value="price">가격</option>
                     </select>
+
                     <input
                         name="keyword"
                         type="text"
                         value={searchCondition.keyword}
                         onChange={handleSearchInputChange}
-                        className="px-4 py-2 border rounded w-full"
+                        className="flex-grow px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 bg-gray-50 transition ease-in-out duration-200 hover:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-400 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300"
                         placeholder="검색어를 입력하세요"
                     />
+
                     <button
                         onClick={handleSearch}
-                        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                        className="px-4 py-2 bg-purple-500 text-white font-medium rounded-md shadow-md transition ease-in-out duration-200 hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-50"
                     >
                         검색
                     </button>
                 </div>
 
+
                 <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-                    <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
+            <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
                         <table className="min-w-full leading-normal">
                             <thead>
                             <tr>
