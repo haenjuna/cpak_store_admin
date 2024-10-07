@@ -1,6 +1,7 @@
 import {initProductState, IProduct} from "../../types/product.ts";
 import {useRef, useState} from "react";
 import {postAdd} from "../../apis/productAPI.ts";
+import {useNavigate} from "react-router-dom";
 
 
 
@@ -11,6 +12,7 @@ function AdminProductRegisterComponent() {
 
     // 파일등록처리 반응형 객체
     const filesRef = useRef<HTMLInputElement>(null);
+    const navigate = useNavigate()
 
     // 인풋값 변경시 State 객체 value 변경 처리 함수
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -43,6 +45,7 @@ function AdminProductRegisterComponent() {
                 filesRef.current.value = ''
             }
             setProduct({...initProductState})
+            navigate('/product/list',)
         })
     }
 
