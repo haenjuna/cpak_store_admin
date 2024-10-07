@@ -1,7 +1,13 @@
+import BasicLayout from "../layouts/MainLayouut.tsx";
+import AdminProductListPage from "./product/AdminProductListPage.tsx";
 
 function AdminMainPage() {
     return (
-        <div>Admin Main Page</div>
+        <BasicLayout>
+            <div>
+                <AdminProductListPage></AdminProductListPage>
+            </div>
+        </BasicLayout>
     );
 }
 

@@ -1,7 +1,10 @@
+import ProductListComponent from "../../components/product/ProductListComponent.tsx";
+
 
 function AdminProductListPage() {
+
     return (
-        <div>Admin Product List Page</div>
+            <ProductListComponent/>
     );
 }
 

@@ -1,20 +1,25 @@
-import {createBrowserRouter} from "react-router-dom";
 import {lazy, Suspense} from "react";
-
-const MainPage = lazy(() => import("../pages/MainPage"))
-const Contact = lazy(() => import("../pages/Contact"))
+import LoadingPage from "../pages/LoadingPage.tsx";
+import {Navigate} from "react-router-dom";
 
 export const Loading = <LoadingPage></LoadingPage>
 
-const memberRouter = createBrowserRouter([
-    {
-        path: "/",
-        element: <Suspense fallback={Loading}><MainPage/></Suspense> ,
-    },
-    {
-        path: "/contact",
-        element: <Suspense fallback={Loading}><Contact/></Suspense>
-    },
-])
+const AdminMemberListPage = lazy(() => import("../pages/member/AdminMemberListPage.tsx"))
+const MemberIndex = lazy(() => import("../pages/member/AdminMemberIndex.tsx"))
+
+const memberRouter = {
+    path: '/member',
+    element: <Suspense fallback={Loading}><MemberIndex/></Suspense>,
+    children: [
+        {
+            path: "",
+            element: <Navigate to='list' replace={true}></Navigate>
+        },
+        {
+            path: "list",
+            element: <Suspense fallback={Loading}><AdminMemberListPage/></Suspense>,
+        },
+        ]
+}
 
 export default memberRouter
