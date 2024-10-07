@@ -18,20 +18,20 @@ const makeArr = (from:number, to:number): number[] =>{
 
 function PageComponent({pageResponse}: Props): ReactElement {
 
-    const current: number = pageResponse.current + 1
-    const totalPage: number = Math.ceil(pageResponse.totalCount / 10.0)
+    const current: number = pageResponse.current
+    const totalPage: number = Math.ceil(pageResponse.totalCount / 10)
     const tempLast: number = Math.ceil(current / 10.0) * 10
     const startPage: number = tempLast - 9
     const endPage: number = totalPage < tempLast ? totalPage : tempLast
     const prev:boolean = startPage !== 1
     const next:boolean = totalPage > endPage
 
+
     const pageNums:number[] = makeArr(startPage, endPage)
 
     const [query,setQuery] = useSearchParams()
 
     const changePage = (pageNum: number) => {
-        console.log(pageResponse)
 
         query.set("page", String(pageNum))
         setQuery(query)
