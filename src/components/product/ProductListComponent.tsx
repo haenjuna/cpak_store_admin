@@ -80,7 +80,6 @@ function ProductListComponent() {
                     </div>
                 </td>
             </tr>
-
         )
     })
 
