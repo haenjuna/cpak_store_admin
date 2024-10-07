@@ -1,18 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { initProductState, IProduct } from "../../types/product.ts";
+import { IProduct } from "../../types/product.ts";
 import {deleteOne, getOne, putOne} from "../../apis/productAPI.ts";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import modalState from "../../atoms/modalState.ts";
 import LoadingComponent from "../common/LoadingComponent.tsx";
+import useProductModal from "../../hooks/useProductModal.ts";
 
 function AdminProductModifyComponent() {
-    const [product, setProduct] = useState<IProduct>({...initProductState});
     const [loading, setLoading] = useState<boolean>(false);
-    const { pno } = useRecoilValue(modalState);
+
+    const {pno, product, setProduct, closeModal} = useProductModal()
 
     const filesRef = useRef<HTMLInputElement>(null);
     const [imageURLs, setImageURLs] = useState<string[]>([]);
-    const setModal = useSetRecoilState(modalState);
     const baseURL = "http://118.38.219.107:8089/api/products/view";
 
     useEffect(() => {
@@ -106,10 +104,7 @@ function AdminProductModifyComponent() {
         }
     };
 
-    // 모달 닫기 함수
-    const closeModal = () => {
-        setModal({ isModal: false, isModify: false, pno: 0 });
-    };
+
 
     return (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
