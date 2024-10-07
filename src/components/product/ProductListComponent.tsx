@@ -1,35 +1,12 @@
-import { useEffect, useState } from "react";
-import { useSearchParams, useLocation } from "react-router-dom";
-import { getProductList } from "../../apis/productAPI.ts";
-import { initPageResponseState, IPageResponse, IProduct } from "../../types/product.ts";
+import { IProduct } from "../../types/product.ts";
 import PageComponent from "../common/PageComponent.tsx";
 import { useRecoilState } from "recoil";
 import modalState from "../../atoms/modalState.ts";
 import AdminProductModalComponent from "./AdminProductModalComponent.tsx";
 import LoadingComponent from "../common/LoadingComponent.tsx";
+import useProductList from "../../hooks/useProductList.ts";
 
 function ProductListComponent() {
-    const [pageResponse, setPageResponse] = useState<IPageResponse>({ ...initPageResponseState });
-    const [loading, setLoading] = useState<boolean>(false);
-    const [query, setQuery] = useSearchParams();
-    const location = useLocation();
-
-    const page: number = Number(query.get("page")) || 1;
-    const size: number = Number(query.get("size")) || 10;
-
-    const [searchCondition, setSearchCondition] = useState<{ type: string; keyword: string }>({
-        type: query.get("type") || "pname", // 기본 검색 조건
-        keyword: query.get("keyword") || "", // 기본 검색어
-    });
-
-    useEffect(() => {
-        setLoading(true);
-        getProductList(page, size, searchCondition.type, searchCondition.keyword).then((data) => {
-            setPageResponse(data);
-            setLoading(false);
-        });
-    }, [query,searchCondition, location.key, page, size]);
-
     const [modal, setModal] = useRecoilState(modalState);
 
     const openModal = (pno: number) => {
@@ -40,28 +17,9 @@ function ProductListComponent() {
         });
     };
 
-    const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchCondition((prev) => ({
-            ...prev,
-            keyword: e.target.value, // 키워드만 업데이트
-        }));
-    };
+    const {loading, pageResponse, searchCondition, handleSearchInputChange, handleSearchInputType, handleSearch} = useProductList()
 
-    const handleSearchInputType = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        console.log(e.target.value)
-        setSearchCondition((prev) => ({
-            ...prev,
-            type: e.target.value, // 타입만 업데이트
-        }));
-    };
 
-    const handleSearch = () => {
-        setQuery(() => {
-            const newParams = new URLSearchParams();
-            newParams.set(searchCondition.type, searchCondition.keyword); // 검색어를 쿼리스트링에 반영
-            return newParams;
-        });
-    };
 
     const ListLi = pageResponse.dtoList.map((product: IProduct) => {
         const { pno, pname, pdesc, price, delFlag, uploadFileNames } = product;
@@ -158,7 +116,7 @@ function ProductListComponent() {
                                 <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400">
                                     상품 가격
                                 </th>
-                                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400">
+                                <th className="px-5 git py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400">
                                     Actions
                                 </th>
                             </tr>
