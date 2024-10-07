@@ -17,6 +17,7 @@ function ProductListComponent() {
     const page: number = Number(query.get("page")) || 1;
     const size: number = Number(query.get("size")) || 10;
 
+
     const [searchCondition, setSearchCondition] = useState<{ type: string; keyword: string }>({
         type: query.get("type") || "pname", // 기본 검색 조건
         keyword: query.get("keyword") || "", // 기본 검색어
