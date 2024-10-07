@@ -35,6 +35,7 @@ function AdminProductReadComponent() {
         setModal({ isModal:true, isModify: true, pno})
     }
 
+
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
             <div className="bg-white rounded-lg shadow-xl w-full max-w-md">
@@ -59,36 +60,35 @@ function AdminProductReadComponent() {
                     <div className="space-y-4">
                         <div className="grid grid-cols-2 gap-4">
                             <div className="border border-gray-300 p-2 rounded flex flex-col items-start">
-                                <span className="text-sm font-medium text-gray-700">상품명</span>
-                                <span className="font-bold text-gray-900">{product.pname}</span>
+                                <span className="text-sm font-bold text-gray-700">상품명</span>
+                                <span className="text-gray-900">{product.pname}</span>
                             </div>
                             <div className="border border-gray-300 p-2 rounded flex flex-col items-start">
-                                <span className="text-sm font-medium text-gray-700">상품가격</span>
-                                <span className="font-bold text-gray-900">{product.price}</span>
+                                <span className="text-sm font-bold text-gray-700">상품가격</span>
+                                <span className="text-gray-900">{product.price}</span>
                             </div>
                         </div>
                         <div>
-                            <span className="block text-sm font-medium text-gray-700">상품 설명</span>
-                            <p className="mt-1 text-sm text-gray-600">
-                                {product.pdesc}
-                            </p>
+                            <div className="border border-gray-300 p-2 rounded flex flex-col items-start">
+                                <span className="font-bold text-sm text-gray-700">상품 설명</span>
+                                <span className="text-gray-900">{product.pdesc}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-end space-x-3 px-6 py-3 bg-gray-50 border-t border-gray-200">
+
+                <div className="w-full flex space-x-2 mt-4 px-4 pb-4">
                     <button
-                        onClick={closeModal}
-                        className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >
-                        닫기
+                        className="w-1/2 bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-200"
+                        onClick={closeModal} >
+                        Close
                     </button>
-                    <button
-                        onClick={changeToModify}
-                        className="px-4 py-2 border border-transparent rounded-md text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >
-                        수정
+                    <button className="w-1/2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-500"
+                        onClick={changeToModify} >
+                        Modify
                     </button>
                 </div>
+
             </div>
         </div>
 
