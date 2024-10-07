@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSearchParams, useLocation} from "react-router-dom";
+import { useSearchParams, useLocation } from "react-router-dom";
 import { getProductList } from "../../apis/productAPI.ts";
 import { initPageResponseState, IPageResponse, IProduct } from "../../types/product.ts";
 import PageComponent from "../common/PageComponent.tsx";
@@ -12,22 +12,23 @@ function ProductListComponent() {
     const [pageResponse, setPageResponse] = useState<IPageResponse>({ ...initPageResponseState });
     const [loading, setLoading] = useState<boolean>(false);
     const [query, setQuery] = useSearchParams();
-    const location = useLocation();;
+    const location = useLocation();
 
     const page: number = Number(query.get("page")) || 1;
     const size: number = Number(query.get("size")) || 10;
-    const pnameQuery: string = query.get("pname") || ""; // 쿼리스트링에서 pname 가져오기
 
-    const [searchTerm, setSearchTerm] = useState<string>(pnameQuery); // 쿼리스트링으로부터 검색어 초기화
+    const [searchCondition, setSearchCondition] = useState<{ type: string; keyword: string }>({
+        type: query.get("type") || "pname", // 기본 검색 조건
+        keyword: query.get("keyword") || "", // 기본 검색어
+    });
 
     useEffect(() => {
         setLoading(true);
-        getProductList(page, size, pnameQuery).then((data) => {
+        getProductList(page, size, searchCondition.type, searchCondition.keyword).then((data) => {
             setPageResponse(data);
             setLoading(false);
-            console.log(query.toString())
         });
-    }, [searchTerm, location.key]);
+    }, [query,searchCondition, location.key, page, size]);
 
     const [modal, setModal] = useRecoilState(modalState);
 
@@ -40,19 +41,26 @@ function ProductListComponent() {
     };
 
     const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTerm(e.target.value);
+        setSearchCondition((prev) => ({
+            ...prev,
+            keyword: e.target.value, // 키워드만 업데이트
+        }));
+    };
+
+    const handleSearchInputType = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        console.log(e.target.value)
+        setSearchCondition((prev) => ({
+            ...prev,
+            type: e.target.value, // 타입만 업데이트
+        }));
     };
 
     const handleSearch = () => {
-        // 쿼리스트링에 pname을 추가하고 URL을 갱신
-        setQuery((prev) => {
-            const newParams = new URLSearchParams(prev);
-            newParams.set("pname", searchTerm); // 검색어를 쿼리스트링에 반영
+        setQuery(() => {
+            const newParams = new URLSearchParams();
+            newParams.set(searchCondition.type, searchCondition.keyword); // 검색어를 쿼리스트링에 반영
             return newParams;
         });
-
-        // 또는 navigate로 URL을 변경할 수도 있음
-        // navigate(`?page=${page}&size=${size}&pname=${searchTerm}`);
     };
 
     const ListLi = pageResponse.dtoList.map((product: IProduct) => {
@@ -100,7 +108,7 @@ function ProductListComponent() {
 
     return (
         <div className="container mx-auto px-4 sm:px-8">
-            {loading && <LoadingComponent></LoadingComponent>}
+            {loading && <LoadingComponent />}
             <div className="py-8">
                 <h2 className="text-2xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
                     Admin Product List Page
@@ -108,12 +116,22 @@ function ProductListComponent() {
 
                 {/* 검색 입력과 버튼 */}
                 <div className="mb-4 flex space-x-4">
+                    <select
+                        name="type"
+                        value={searchCondition.type}
+                        onChange={handleSearchInputType}
+                        className="border rounded px-4 py-2"
+                    >
+                        <option value="pname">상품명</option>
+                        <option value="price">가격</option>
+                    </select>
                     <input
+                        name="keyword"
                         type="text"
-                        value={searchTerm}
+                        value={searchCondition.keyword}
                         onChange={handleSearchInputChange}
                         className="px-4 py-2 border rounded w-full"
-                        placeholder="상품명을 입력하세요"
+                        placeholder="검색어를 입력하세요"
                     />
                     <button
                         onClick={handleSearch}
@@ -148,10 +166,10 @@ function ProductListComponent() {
                             <tbody>{ListLi}</tbody>
                         </table>
                     </div>
-                    <PageComponent pageResponse={pageResponse}></PageComponent>
+                    <PageComponent pageResponse={pageResponse} />
                 </div>
 
-                {modal.isModal && <AdminProductModalComponent></AdminProductModalComponent>}
+                {modal.isModal && <AdminProductModalComponent />}
             </div>
         </div>
     );
