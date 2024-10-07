@@ -3,7 +3,6 @@ import AdminProductReadComponent from "../../components/product/AdminProductRead
 function AdminProductReadPage() {
     return (
         <>
-            <div>Admin Product Read Page</div>
             <AdminProductReadComponent></AdminProductReadComponent>
         </>
     );
