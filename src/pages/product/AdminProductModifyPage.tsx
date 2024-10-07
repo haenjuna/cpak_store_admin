@@ -3,7 +3,6 @@ import AdminProductModifyComponent from "../../components/product/AdminProductMo
 function AdminProductModifyPage() {
     return (
         <>
-            <div>Admin Product Modify Page</div>
             <AdminProductModifyComponent></AdminProductModifyComponent>
         </>
     );

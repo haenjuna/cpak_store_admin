@@ -50,7 +50,7 @@ function AdminProductRegisterComponent() {
     }
 
     return (
-        <div className="flex items-center justify-center h-screen p-6 sm:p-12">
+        <div className="flex items-center justify-center h-screen p-2 sm:p-12">
             <div className="w-full md:w-1/2">
                 <h1 className="mb-4 text-3xl font-semibold text-center text-gray-700 dark:text-gray-200">
                     상품 등록
@@ -58,7 +58,7 @@ function AdminProductRegisterComponent() {
                 <div>
                     <div className="mb-4">
                         <label htmlFor="product-name"
-                               className="block text-xl font-medium text-gray-700 dark:text-gray-400">
+                               className="block text-xl font-medium text-gray-700 dark:text-gray-400 mb-2">
                             상품명
                         </label>
                         <input
@@ -73,7 +73,8 @@ function AdminProductRegisterComponent() {
                     </div>
 
                     <div className="mb-4">
-                        <label htmlFor="price" className="block text-xl font-medium text-gray-700 dark:text-gray-400">
+                        <label htmlFor="price"
+                               className="block text-xl font-medium text-gray-700 dark:text-gray-400 mb-2">
                             가격
                         </label>
                         <input
@@ -89,7 +90,7 @@ function AdminProductRegisterComponent() {
 
                     <div className="mb-4">
                         <label htmlFor="description"
-                               className="block text-xl font-medium text-gray-700 dark:text-gray-400">
+                               className="block text-xl font-medium text-gray-700 dark:text-gray-400 mb-2">
                             상품 설명
                         </label>
                         <textarea
@@ -104,7 +105,8 @@ function AdminProductRegisterComponent() {
                     </div>
 
                     <div className="mb-6">
-                        <label htmlFor="image" className="block text-xl font-medium text-gray-700 dark:text-gray-400">
+                        <label htmlFor="image"
+                               className="block text-xl font-medium text-gray-700 dark:text-gray-400 mb-2">
                             이미지 업로드
                         </label>
                         <input
@@ -117,13 +119,15 @@ function AdminProductRegisterComponent() {
                         />
                     </div>
 
-                    <button
-                        type="submit"
-                        className="w-full px-4 py-2 text-xl font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition-colors duration-150"
-                        onClick={handleSubmit}
-                    >
-                        상품 등록
-                    </button>
+                    <div className="flex justify-center">
+                        <button
+                            type="submit"
+                            className="w-1/3 bg-purple-600 text-white px-5 py-3 rounded-md hover:bg-purple-400 mt-2"
+                            onClick={handleSubmit}>
+                            Register
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </div>
