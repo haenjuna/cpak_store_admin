@@ -22,6 +22,7 @@ function AdminProductModifyComponent() {
         setLoading(true)
         getOne(pno).then(result => {
             setProduct(result)
+            console.log(result.uploadFileNames)
             setLoading(false)
         })
     },[pno])
@@ -37,27 +38,36 @@ function AdminProductModifyComponent() {
         }));
     };
 
+
     // 수정버튼 클릭 함수
     const handleModifyClick = () => {
-        const files = filesRef?.current?.files;
-        const formData:FormData = new FormData();
 
-        if (files && files.length > 0) {
+        const formData:FormData = new FormData();
+        const files = filesRef?.current?.files
+
+        
+        // 신규파일 등록 처리
+        if(files) {
             for (let i = 0; i < files.length; i++) {
-                formData.append('files', files[i]);
-            }//end for
-        }// end if
+                formData.append("files", files[i])
+            }
+        }
 
         formData.append('pname',product.pname)
         formData.append('pdesc',product.pdesc)
         formData.append('price',product.price)
+        if (product.uploadFileNames && product.uploadFileNames.length > 0) {
+            for (let i = 0; i < product.uploadFileNames.length; i++) {
+                formData.append('uploadFileNames', product.uploadFileNames[i])
+            }
+        }
 
-        console.log(formData)
         putOne(formData, pno).then(data => {
             console.log(data)
             if (filesRef?.current?.files){
                 filesRef.current.value = ''
             }
+            closeModal()
         })
     }
 
@@ -66,6 +76,7 @@ function AdminProductModifyComponent() {
 
         deleteOne(pno).then( () => {
             console.log('delete complete')
+            closeModal()
         })
     }
 
@@ -86,7 +97,7 @@ function AdminProductModifyComponent() {
                     X
                 </button>
                 <div className="flex flex-col items-center">
-                    <img src={`http://118.38.219.107:8089/api/products/view/${filesRef}`} alt="Product"
+                    <img src={`http://118.38.219.107:8089/api/products/view/${product.uploadFileNames}`} alt="Product"
                          className="w-32 h-32 mb-4"/>
                     <div className="w-full">
                         <label htmlFor="ProductName" className="block text-sm font-medium text-gray-700">
@@ -135,8 +146,9 @@ function AdminProductModifyComponent() {
                             File
                         </label>
                         <input type="file"
+                               ref={filesRef}
                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                               ref={filesRef} name='files' multiple={true}/>
+                               name='files' multiple={true}/>
                     </div>
                     <div className="w-full flex space-x-2 mt-4">
                         <button

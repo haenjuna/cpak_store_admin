@@ -5,7 +5,7 @@ export interface IProduct {
     price: string
     delFlag: boolean
     files: FormData | null
-    uploadFileNames: FormData | null
+    uploadFileNames: string[] | null
 }
 
 // 객체 초기화 ( IProduct )
@@ -16,7 +16,7 @@ export const initProductState:IProduct = {
     price: '',
     files: null,
     delFlag: false,
-    uploadFileNames:null
+    uploadFileNames:[]
 };
 
 export interface IPageResponse{
