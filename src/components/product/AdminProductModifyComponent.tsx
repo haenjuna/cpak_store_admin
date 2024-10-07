@@ -115,13 +115,11 @@ function AdminProductModifyComponent() {
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg shadow-lg w-full max-w-lg p-6 relative">
                 {loading && <LoadingComponent />}
-                {/* 모달 헤더 */}
                 <div className="flex items-center justify-between border-b" >
                     <h2 className="text-lg font-semibold mb-3">제품 수정 및 삭제</h2>
                     <button onClick={closeModal} className="text-gray-400 hover:text-gray-500 text-2xl font-bold mb-3" aria-label="닫기">X</button>
                 </div>
                 <div className="flex flex-col items-center">
-                    {/* 이미지와 나머지 인풋 폼 */}
                     <div className="grid grid-cols-3 gap-2 mt-3">
                         {imageURLs.map((url, index) => (
                             <div key={url || index} className="relative flex flex-col items-center mb-4">
