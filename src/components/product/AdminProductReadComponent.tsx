@@ -46,7 +46,7 @@ function AdminProductReadComponent() {
                         className="text-gray-400 hover:text-gray-500 text-2xl"
                         aria-label="닫기"
                     >
-                        &times;
+                        x
                     </button>
                 </div>
                 <div className="p-6">
