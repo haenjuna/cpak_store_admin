@@ -19,8 +19,8 @@ function ProductListComponent() {
 
 
     const [searchCondition, setSearchCondition] = useState<{ type: string; keyword: string }>({
-        type: query.get("type") || "pname", // 기본 검색 조건
-        keyword: query.get("keyword") || "", // 기본 검색어
+        type: "pname", // 기본 검색 조건
+        keyword: "", // 기본 검색어
     });
 
     useEffect(() => {
@@ -29,7 +29,7 @@ function ProductListComponent() {
             setPageResponse(data);
             setLoading(false);
         });
-    }, [query,searchCondition, location.key, page, size]);
+    }, [query, location.key]);
 
     const [modal, setModal] = useRecoilState(modalState);
 
@@ -41,6 +41,7 @@ function ProductListComponent() {
         });
     };
 
+
     const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchCondition((prev) => ({
             ...prev,
@@ -49,7 +50,6 @@ function ProductListComponent() {
     };
 
     const handleSearchInputType = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        console.log(e.target.value)
         setSearchCondition((prev) => ({
             ...prev,
             type: e.target.value, // 타입만 업데이트
@@ -109,11 +109,12 @@ function ProductListComponent() {
 
     return (
         <div className="container mx-auto px-4 sm:px-8">
-            {loading && <LoadingComponent />}
             <div className="py-8">
                 <h2 className="text-2xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
                     Admin Product List Page
                 </h2>
+
+                {loading && <LoadingComponent />}
 
                 {/* 검색 입력과 버튼 */}
                 <div className="mb-4 flex space-x-4">
@@ -141,6 +142,8 @@ function ProductListComponent() {
                         검색
                     </button>
                 </div>
+
+
 
                 <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
                     <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
