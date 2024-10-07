@@ -110,18 +110,18 @@ function AdminProductModifyComponent() {
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg shadow-lg w-full max-w-lg p-6 relative">
                 {loading && <LoadingComponent />}
-                <div className="flex items-center justify-between border-b" >
+                  <div className="flex items-center justify-between border-b" >
                     <h2 className="text-lg font-semibold mb-3">제품 수정 및 삭제</h2>
                     <button onClick={closeModal} className="text-gray-400 hover:text-gray-500 text-2xl font-bold mb-3" aria-label="닫기">X</button>
                 </div>
                 <div className="flex flex-col items-center">
-                    <div className="grid grid-cols-3 gap-2 mt-3">
+                    <div className="grid grid-cols-3 gap-2 mt-4">
                         {imageURLs.map((url, index) => (
                             <div key={url || index} className="relative flex flex-col items-center mb-4">
                                 <img src={url} alt={`Product Image ${index + 1}`} className="w-32 h-32 mb-2"/>
                                 <button
                                     onClick={() => handleImageDelete(url)}
-                                    className="absolute top-0.5 right-0.5 bg-black text-white p-1 rounded-full"
+                                    className="absolute top-0.5 right-0.5 text-white p-1"
                                     aria-label={`Delete image ${index + 1}`}
                                 >
                                     X
@@ -131,8 +131,7 @@ function AdminProductModifyComponent() {
                     </div>
 
                     <div className="w-full">
-                        <label htmlFor="ProductName" className="block text-sm font-medium text-gray-700">Product
-                            Name</label>
+                        <label htmlFor="ProductName" className="block text-sm font-medium text-gray-700">상품명</label>
                         <input
                             type="text"
                             id="ProductName"
@@ -146,7 +145,7 @@ function AdminProductModifyComponent() {
 
                     <div className="w-full">
                         <label htmlFor="ProductDesc" className="block text-sm font-medium text-gray-700 pt-3">
-                            Product Description
+                            상품 설명
                         </label>
                         <input
                             type="text"
@@ -160,7 +159,7 @@ function AdminProductModifyComponent() {
                     </div>
                     <div className="w-full">
                         <label htmlFor="Price" className="block text-sm font-medium text-gray-700 pt-3">
-                            Price
+                            가격
                         </label>
                         <input
                             type="text"
@@ -174,7 +173,7 @@ function AdminProductModifyComponent() {
                     </div>
 
                     <div className="w-full">
-                        <label className="block text-sm font-medium text-gray-700 pt-3">File</label>
+                        <label className="block text-sm font-medium text-gray-700 pt-3">파일 첨부</label>
                         <input
                             type="file"
                             ref={filesRef}
@@ -185,7 +184,7 @@ function AdminProductModifyComponent() {
                         />
                     </div>
 
-                    <div className="w-full flex space-x-2 mt-4">
+                    <div className="w-full flex space-x-2 mt-5">
                         <button className="w-1/2 bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-400"
                                 onClick={closeModal}>Close
                         </button>

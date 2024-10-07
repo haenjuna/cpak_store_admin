@@ -94,7 +94,7 @@ function BasicLayout({children}: {children: React.ReactNode}) {
                 </header>
 
                 <main className="h-full overflow-y-auto">
-                    <div className="container px-6 mx-auto grid m-3">
+                    <div className="container px-2 mx-auto grid m-1">
                         {children}
                     </div>
                 </main>
