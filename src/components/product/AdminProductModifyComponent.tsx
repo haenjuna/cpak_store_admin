@@ -17,66 +17,62 @@ function AdminProductModifyComponent() {
     useEffect(() => {
         setLoading(true);
         getOne(pno).then(result => {
-            setProduct(result);
-            setLoading(false);
+            setProduct(result)
+            console.log(result.uploadFileNames)
+            setLoading(false)
+        })
+    },[pno])
 
-            const prevFiles: string[] = [];
-            result.uploadFileNames?.forEach((fileName, index) => {
-                const jsonStr = JSON.stringify({ key: fileName, value: index });
-                console.log(jsonStr);
-                prevFiles.push(jsonStr);
-            });
-
-            const baseURL = "http://118.38.219.107:8089/api/products/view";
-            const existingImageUrls = prevFiles.map(file => {
-                const { key } = JSON.parse(file);
-                return `${baseURL}/${key}`;
-            });
-            setImageURLs(existingImageUrls);
-        });
-    }, [pno]);
-
-    const handleFileChange = () => {
-        const files = filesRef.current?.files;
-        if (files) {
-            const newUrls = Array.from(files).map(file => URL.createObjectURL(file));
-            setImageURLs(prevUrls => [...prevUrls, ...newUrls]);
-        }
-    };
-
+    // 인풋값 변경시 State 객체 value 변경 처리 함수
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
+
+        const {name, value} = e.target;
+
         setProduct((prevProduct: IProduct) => ({
             ...prevProduct,
             [name]: value,
         }));
     };
 
-    const handleModifyClick = () => {
-        const files = filesRef?.current?.files;
-        const formData: FormData = new FormData();
 
-        if (files && files.length > 0) {
+    // 수정버튼 클릭 함수
+    const handleModifyClick = () => {
+
+        const formData:FormData = new FormData();
+        const files = filesRef?.current?.files
+
+
+        // 신규파일 등록 처리
+        if(files) {
             for (let i = 0; i < files.length; i++) {
-                formData.append('files', files[i]);
+                formData.append("files", files[i])
             }
         }
 
-        formData.append('pname', product.pname);
-        formData.append('pdesc', product.pdesc);
-        formData.append('price', product.price);
+        formData.append('pname',product.pname)
+        formData.append('pdesc',product.pdesc)
+        formData.append('price',product.price)
+        if (product.uploadFileNames && product.uploadFileNames.length > 0) {
+            for (let i = 0; i < product.uploadFileNames.length; i++) {
+                formData.append('uploadFileNames', product.uploadFileNames[i])
+            }
+        }
 
         putOne(formData, pno).then(data => {
             console.log(data);
             if (filesRef?.current?.files) {
                 filesRef.current.value = '';
             }
-        });
-    };
+            closeModal()
+        })
+    }
 
+    // 삭제 버튼 클릭 함수
     const handleDeleteClick = () => {
+
         deleteOne(pno).then( () => {
-            console.log('delete complete');
+            console.log('delete complete')
+            closeModal()
         })
     }
 
@@ -85,7 +81,7 @@ function AdminProductModifyComponent() {
     };
 
     const closeModal = () => {
-        setModal({ isModal: false, isModify: false, pno: 0 });
+        setModal({ isModal: false,isModify: false, pno: 0 });
     };
 
     return (
@@ -137,7 +133,6 @@ function AdminProductModifyComponent() {
                             onChange={handleInputChange}
                         />
                     </div>
-
                     <div className="w-full">
                         <label htmlFor="Price" className="block text-sm font-medium text-gray-700 pt-3">
                             Price
@@ -161,7 +156,6 @@ function AdminProductModifyComponent() {
                             name="files"
                             multiple={true}
                             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                            onChange={handleFileChange}
                         />
                     </div>
 

@@ -8,7 +8,7 @@ const initialState = {
 
 const modalState = atom({
     key: 'modalState',
-    default: initialState
+    default: {...initialState}
 })
 
 export default modalState
