@@ -17,7 +17,7 @@ const makeArr = (from:number, to:number): number[] =>{
 }
 
 function PageComponent({pageResponse}: Props): ReactElement {
-
+    console.log(pageResponse.totalPage)
     const current: number = pageResponse.current + 1
     const tempLast: number = Math.ceil(current / 10.0) * 10
     const startPage: number = tempLast - 9

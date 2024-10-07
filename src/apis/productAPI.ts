@@ -10,8 +10,9 @@ const header =
     }
 
 export const getProductList = async (page?: number, size?: number, type?:string, keyword?:string): Promise<IPageResponse> => {
+
     const pageValue: number = page || 1;
-    const sizeValue: number = size || 10;
+    const sizeValue: number = size || 1;
 
     let query = `${host}/list?page=${pageValue}&size=${sizeValue}`;
 
